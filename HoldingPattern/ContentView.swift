@@ -2,23 +2,28 @@
 //  ContentView.swift
 //  HoldingPattern
 //
-//  Created by dad on 22.02.2026.
-//
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("didCompleteOnboarding") private var didCompleteOnboarding = false
+    @AppStorage("appLanguage") private var appLanguage = "en"
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            if didCompleteOnboarding {
+                MainTabView()
+            } else {
+                OnboardingView(didCompleteOnboarding: $didCompleteOnboarding)
+            }
         }
-        .padding()
+        .environment(\.locale, Locale(identifier: appLanguage))
+        .preferredColorScheme(.dark)
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: [WaitEvent.self, WaitCategoryModel.self], inMemory: true)
 }
