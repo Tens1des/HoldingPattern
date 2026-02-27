@@ -82,7 +82,7 @@ struct AnalyticsDashboardView: View {
             } else {
                 ForEach(list.prefix(5)) { item in
                     HStack {
-                        Text(item.categoryName)
+                        Text(localizedCategoryName(item.categoryName))
                             .foregroundStyle(AppTheme.textPrimary)
                         Spacer()
                         Text("\(item.frequency)× • \(formatDuration(item.totalDurationSeconds))")
@@ -142,7 +142,7 @@ struct AnalyticsDashboardView: View {
             } else {
                 ForEach(list.prefix(5)) { c in
                     HStack {
-                        Text(c.categoryName)
+                        Text(localizedCategoryName(c.categoryName))
                             .foregroundStyle(AppTheme.textPrimary)
                         Spacer()
                         Text("\(c.frequency)× • avg \(formatDuration(c.avgDurationSeconds))")
